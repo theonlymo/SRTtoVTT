@@ -1,38 +1,63 @@
 # Subtitle Converter API
-This is a simple API for converting subtitle files to different formats. It takes a subtitle URL, downloads the file, converts it to VTT format, and returns the converted subtitle.
+
+The Subtitle Converter API is a straightforward tool for converting subtitle files into different formats. It functions by accepting a subtitle URL, fetching the file from the provided URL, converting it to VTT format, and returning the converted subtitle. Additionally, it allows users to upload subtitle files for conversion.
 
 ## Installation
 ```
 # Clone the repo
-git clone https://github.com/example/subtitle-api.git
+git clone https://github.com/theonlymo/SRTtoVTT.git
 
 # Install dependencies
 npm install
+
+# run 
+node index.js
+
 ```
 ## Usage
-The API has a single endpoint:
+### Convert from URL
+The API offers an endpoint for converting subtitles from a URL:
+
 ```
 GET /?url=https://example.com/subtitles.srt
 ```
-This will download the SRT file from the provided URL, convert it to VTT format, and return the converted subtitle text.
+This endpoint downloads the SRT file from the specified URL, performs the conversion to VTT format, and then provides the converted subtitle text.
 
-Simply make a GET request and pass the url parameter with the subtitle file URL.
+To use the URL conversion feature, make a GET request and include the url parameter with the URL of the subtitle file.
 
 The API will return the converted subtitle text with a text/vtt content type header.
 
+### Upload and Convert File
+The API also supports uploading and converting subtitle files. Use the following endpoint:
+
+```
+POST /upload
+```
+To upload a subtitle file for conversion, send a POST request with the subtitleFile field containing the subtitle file. The API will convert the uploaded file to VTT format and provide the converted subtitle text in the response.
+
+Example using cURL:
+
+```
+curl -X POST -F "subtitleFile=@your_subtitle.srt" http://localhost:5000/upload
+```
+Note
+The API handles both URL-based conversion and file uploads, providing flexibility in how you convert your subtitle files.
+
+
 # Description
-The server is built with Express. It uses the subtitle-converter module to handle converting between subtitle formats.
+The Subtitle Converter API is built using Express and relies on the subtitle-converter module to handle subtitle format conversions.
 
-# Some key aspects:
+Key aspects of the API include:
 
-- express.json() and express.urlencoded() middleware is used to parse request bodies
-- Input validation middleware validates the url parameter
-- Rate limiting middleware limits requests per IP to prevent abuse
-- The axios module is used to download the subtitle file from the provided URL
-- The subtitle conversion happens in a separate middleware function
-- Error handling middleware catches errors and returns appropriate HTTP status codes
-- The converted subtitle text is attached to the request object and sent back in the route handler
-- The code is structured for clarity and extensibility. Logging, authentication, caching, or additional endpoints could be easily added.
+- Middleware for parsing request bodies using express.json() and express.urlencoded().
+- Input validation middleware to validate the url parameter for URL-based conversion.
+- Rate limiting middleware to restrict requests per IP address to prevent abuse.
+- Use of the Axios module to download subtitle files from the provided URL for URL-based conversion.
+- Support for subtitle conversion from uploaded files.
+- Error-handling middleware to catch and respond with appropriate HTTP status codes.
+- The converted subtitle text is attached to the request object and sent as the response within the route handler.
+- The code is structured for clarity and extensibility. Additional features like logging, authentication, caching, or extra endpoints can be added with ease.
 
-Overall, it provides a simple and useful API for converting subtitle files!
+In summary, the Subtitle Converter API provides a simple and practical solution for converting subtitle files, making it a valuable tool for handling subtitles effectively.
+
 
