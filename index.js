@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Validate URL
 const validateUrl = (req, res, next) => {
-  const url = req.query.url;
+  const url = encodeURI(req.query.url);
   if (!url || !validator.isURL(url)) {
     console.error('Invalid URL:', url);
     return res.status(400).send('Invalid url');
@@ -49,6 +49,9 @@ const convertSubtitle = async (req, res, next) => {
 // Route handler
 app.get('/', validateUrl, convertSubtitle, async (req, res) => {
   res.setHeader('Content-Type', 'text/vtt');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
   res.send(req.subtitle);
   console.log('Response sent');
 });
