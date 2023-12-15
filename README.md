@@ -2,7 +2,7 @@
 
 The Subtitle Converter API is a straightforward tool for converting subtitle files into different formats. It functions by accepting a subtitle URL, fetching the file from the provided URL, converting it to VTT format, and returning the converted subtitle. Additionally, it allows users to upload subtitle files for conversion.
 
-## Installation
+## Installationvc
 ```
 # Clone the repo
 git clone https://github.com/theonlymo/SRTtoVTT.git
