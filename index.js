@@ -27,7 +27,7 @@ const convertSubtitle = async (req, res, next) => {
     const url = req.query.url;
     console.log('Converting subtitle from URL:', url);
 
-    const response = await axios.get(encodeURI(url));
+    const response = await axios.get(url);
 
     console.log('Subtitle fetched successfully from URL:', url);
 
